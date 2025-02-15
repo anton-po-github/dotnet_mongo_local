@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { ChartsModule } from 'ng2-charts';
+//import { ChartsModule } from 'ng2-charts';
+
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
@@ -25,9 +27,10 @@ import { SignalrComponent } from './components/signalr/signalr.component';
     FetchDataComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
+  //  BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    ChartsModule,
+ //   ChartsModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -36,7 +39,7 @@ import { SignalrComponent } from './components/signalr/signalr.component';
       { path: 'signalr', component: SignalrComponent },
     ])
   ],
-  providers: [],
+  providers: [provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

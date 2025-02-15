@@ -6,7 +6,8 @@ import { SignalrService } from 'src/app/services/signalr.service';
 @Component({
   selector: 'app-signalr',
   templateUrl: './signalr.component.html',
-  styleUrls: ['./signalr.component.scss']
+  styleUrls: ['./signalr.component.scss'],
+  standalone: false
 })
 export class SignalrComponent implements OnInit {
   public chartOptions: any = {
