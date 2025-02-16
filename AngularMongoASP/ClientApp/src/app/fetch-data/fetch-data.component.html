@@ -12,25 +12,50 @@
     [src]="'data:image/png;base64,' + book.iconPath"
     alt=""
   />
-  {{ book.id }}
-  {{ book.bookName }}
-  {{ book.category }}
-  {{ book.price }}
-  {{ book.author }}
-  <button (click)="deleteBook(book.id)">delele</button>
-  <button
-    (click)="
-      isEdit = !isEdit;
-      newBook.id = book.id;
-      newBook.bookName = book.bookName;
-      newBook.category = book.category;
-      newBook.author = book.author;
-      newBook.price = book.price
-    "
-  >
-    to update
-  </button>
+  <div>
+    {{ 'Id: ' + book.id }}
+
+  </div>
+  
+  <div>
+    {{ 'Book Name: ' + book.bookName }}
+
+  </div>
+
+  <div>
+    {{ 'Category: ' + book.category }}
+
+  </div>
+
+  <div>
+    {{ 'Price: ' + book.price }}
+  </div>
+
+  <div>
+    {{ 'Author: ' + book.author }}
+  </div>
+
+  <br>
+
+  <div>
+    <button (click)="deleteBook(book.id)">delele</button>
+    <button
+      (click)="
+        isEdit = !isEdit;
+        newBook.id = book.id;
+        newBook.bookName = book.bookName;
+        newBook.category = book.category;
+        newBook.author = book.author;
+        newBook.price = book.price
+      "
+    >
+      to update
+    </button>
+  </div>
+ 
+
 </div>
+<br>
 <h3>for newBook Icon</h3>
 <app-upload (fileImage)="newBook.icon = $event"></app-upload>
 

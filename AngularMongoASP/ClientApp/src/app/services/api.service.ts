@@ -40,6 +40,10 @@ export class ApiService {
     delete newBook.id;
     delete newBook.icon;
     formData.append('body', JSON.stringify(newBook));
+
+
+    console.log(formData);
+
     return this.http.post<any>(this.url + `books`, formData, { headers: this.httpHeadersFormData });
   }
 
