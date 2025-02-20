@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AngularMongoASP/AngularMongoASP.csproj",
+                "${workspaceFolder}/AngularMongoASP.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/AngularMongoASP/AngularMongoASP.csproj",
+                "${workspaceFolder}/AngularMongoASP.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/AngularMongoASP/AngularMongoASP.csproj",
+                "${workspaceFolder}/AngularMongoASP.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
