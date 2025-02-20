@@ -1,15 +1,11 @@
 using dotnet_mongo_local.Data;
 using dotnet_mongo_local.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace dotnet_mongo_local
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -18,6 +14,7 @@ namespace dotnet_mongo_local
         }
 
         public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,6 +27,7 @@ namespace dotnet_mongo_local
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddSingleton<BookService>();
+            services.AddSingleton<TokenService>();
             services.AddSingleton<MyBookService>();
             services.AddSingleton<FileService>();
             services.AddSingleton<INoteRepository, NoteRepository>();
@@ -44,6 +42,7 @@ namespace dotnet_mongo_local
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
