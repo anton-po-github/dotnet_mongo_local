@@ -36,7 +36,7 @@ export class SignalrComponent implements OnInit {
     this.startHttpRequest();
   }
   private startHttpRequest = () => {
-    this.http.get('http://localhost:3000/api/chart')
+    this.http.get('http://localhost:5135/api/chart')
       .subscribe(res => {
         console.log(res);
       });

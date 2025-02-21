@@ -1,74 +1,66 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using dotnet_mongo_local.Models;
-using dotnet_mongo_local.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace dotnet_mongo_local.Controllers
+[Produces("application/json")]
+[Consumes("application/json", "multipart/form-data")]
+[ApiController]
+[Route("[controller]")]
+public class BooksController : ControllerBase
 {
-    [Produces("application/json")]
-    [Consumes("application/json", "multipart/form-data")]
-    [ApiController]
-    [Route("[controller]")]
-    public class BooksController : ControllerBase
+    private readonly BookService _bookService;
+
+    public BooksController(BookService bookService)
     {
-        private readonly BookService _bookService;
+        _bookService = bookService;
+    }
 
-        public BooksController(BookService bookService)
+    [HttpGet]
+    public ActionResult<List<Book>> Get() => _bookService.Get();
+
+    [HttpGet("{id:length(24)}", Name = "GetBook")]
+    public ActionResult<Book> Get(string id)
+    {
+        var book = _bookService.GetOneBook(id);
+
+        if (book == null)
         {
-            _bookService = bookService;
+            return NotFound();
         }
 
-        [HttpGet]
-        public ActionResult<List<Book>> Get() => _bookService.Get();
+        return book;
+    }
+    public async Task<Book> Create([FromForm(Name = "icon")] IFormFile file, [FromForm(Name = "body")] string body)
+    {
+        Book book = JsonConvert.DeserializeObject<Book>(body);
+        return await _bookService.Create(book, file);
+    }
 
-        [HttpGet("{id:length(24)}", Name = "GetBook")]
-        public ActionResult<Book> Get(string id)
+    [HttpPut("{id:length(24)}")]
+    public IActionResult Update(string id, Book bookIn)
+    {
+        var book = _bookService.GetOneBook(id);
+
+        if (book == null)
         {
-            var book = _bookService.GetOneBook(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return book;
-        }
-        public async Task<Book> Create([FromForm(Name = "icon")] IFormFile file, [FromForm(Name = "body")] string body)
-        {
-            Book book = JsonConvert.DeserializeObject<Book>(body);
-            return await _bookService.Create(book, file);
+            return NotFound();
         }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Book bookIn)
+        _bookService.Update(id, bookIn);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id:length(24)}")]
+    public IActionResult Delete(string id)
+    {
+        var book = _bookService.GetOneBook(id);
+        if (book == null)
         {
-            var book = _bookService.GetOneBook(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            _bookService.Update(id, bookIn);
-
-            return NoContent();
+            return NotFound();
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
-        {
-            var book = _bookService.GetOneBook(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
+        _bookService.Remove(book, book.IconId);
 
-            _bookService.Remove(book, book.IconId);
-
-            return NoContent();
-        }
+        return NoContent();
     }
 }

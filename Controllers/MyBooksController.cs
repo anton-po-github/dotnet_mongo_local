@@ -1,74 +1,68 @@
-using System.Collections.Generic;
-using dotnet_mongo_local.Models;
-using dotnet_mongo_local.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace dotnet_mongo_local.Controllers
+[ApiController]
+[Route("[controller]")]
+public class MyBooksController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class MyBooksController : ControllerBase
+    private readonly MyBookService _myBookService;
+
+    public MyBooksController(MyBookService myBookService)
     {
-        private readonly MyBookService _myBookService;
+        _myBookService = myBookService;
+    }
 
-        public MyBooksController(MyBookService myBookService)
+    [HttpGet]
+    public ActionResult<List<Book>> Get() =>
+        _myBookService.Get();
+
+    [HttpGet("{id:length(24)}", Name = "GetMyBook")]
+    public ActionResult<Book> Get(string id)
+    {
+        var book = _myBookService.Get(id);
+
+        if (book == null)
         {
-            _myBookService = myBookService;
+            return NotFound();
         }
 
-        [HttpGet]
-        public ActionResult<List<Book>> Get() =>
-            _myBookService.Get();
+        return book;
+    }
 
-        [HttpGet("{id:length(24)}", Name = "GetMyBook")]
-        public ActionResult<Book> Get(string id)
+    [HttpPost]
+    public ActionResult<Book> Create(Book book)
+    {
+        _myBookService.Create(book);
+
+        return CreatedAtRoute("GetMyBook", new { id = book.Id.ToString() }, book);
+    }
+
+    [HttpPut("{id:length(24)}")]
+    public IActionResult Update(string id, Book bookIn)
+    {
+        var book = _myBookService.Get(id);
+
+        if (book == null)
         {
-            var book = _myBookService.Get(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return book;
+            return NotFound();
         }
 
-        [HttpPost]
-        public ActionResult<Book> Create(Book book)
-        {
-            _myBookService.Create(book);
+        _myBookService.Update(id, bookIn);
 
-            return CreatedAtRoute("GetMyBook", new { id = book.Id.ToString() }, book);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:length(24)}")]
+    public IActionResult Delete(string id)
+    {
+        var book = _myBookService.Get(id);
+
+        if (book == null)
+        {
+            return NotFound();
         }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Book bookIn)
-        {
-            var book = _myBookService.Get(id);
+        _myBookService.Remove(book.Id);
 
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            _myBookService.Update(id, bookIn);
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
-        {
-            var book = _myBookService.Get(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            _myBookService.Remove(book.Id);
-
-            return NoContent();
-        }
+        return NoContent();
     }
 }
