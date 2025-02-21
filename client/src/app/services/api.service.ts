@@ -8,8 +8,8 @@ import { IBook } from '../fetch-data/fetch-data.component';
 })
 export class ApiService {
 
-  private url = 'http://localhost:5135/';
-  private myUrl = 'http://localhost:5135/my';
+  private url = 'http://localhost:5555/';
+  private myUrl = 'http://localhost:5555/my';
   protected httpHeaders: HttpHeaders = new HttpHeaders();
   protected httpHeadersForm: HttpHeaders = new HttpHeaders();
   protected httpHeadersFormData: HttpHeaders = new HttpHeaders();
