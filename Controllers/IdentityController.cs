@@ -4,20 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 [ApiController]
 [Route("[controller]")]
-public class OperationsController : Controller
+public class IdentityController : Controller
 {
-    private UserManager<ApplicationUser> userManager;
+    private UserManager<ApplicationUser> _userManager;
 
-    private RoleManager<ApplicationRole> roleManager;
+    private RoleManager<ApplicationRole> _roleManager;
 
-    public OperationsController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+    public IdentityController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
     {
-        this.userManager = userManager;
-        this.roleManager = roleManager;
+        _userManager = userManager;
+        _roleManager = roleManager;
     }
 
-    public ViewResult Create() => View();
-
+    // Add MongoIdentityUser = Microsoft.AspNetCore.Identity
     [HttpPost("user")]
     public async Task<IdentityResult> Create(User user)
     {
@@ -28,7 +27,7 @@ public class OperationsController : Controller
             // Tokens = List<>
         };
 
-        IdentityResult result = await userManager.CreateAsync(appUser, user.Password);
+        IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
 
         // await userManager.AddToRoleAsync(appUser, "Admin");
 
@@ -46,7 +45,7 @@ public class OperationsController : Controller
     [HttpPost("role")]
     public async Task<IdentityResult> CreateRole([Required] Role role)
     {
-        IdentityResult result = await roleManager.CreateAsync(new ApplicationRole() { Name = role.Name });
+        IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole() { Name = role.Name });
         if (result.Succeeded)
             ViewBag.Message = "Role Created Successfully";
         else

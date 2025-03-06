@@ -32,6 +32,7 @@ public class BooksController : ControllerBase
     public async Task<Book> Create([FromForm(Name = "icon")] IFormFile file, [FromForm(Name = "body")] string body)
     {
         Book book = JsonConvert.DeserializeObject<Book>(body);
+
         return await _bookService.Create(book, file);
     }
 

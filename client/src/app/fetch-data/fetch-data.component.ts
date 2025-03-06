@@ -41,7 +41,7 @@ export class FetchDataComponent implements OnInit {
     this.apiService.deleteBook(bookId)
       .subscribe(
         res => {
-          console.log(res);
+         // console.log(res);
           this.getAllBooks();
         },
         error => console.log(error)
@@ -49,6 +49,8 @@ export class FetchDataComponent implements OnInit {
   }
 
   public addOneBook(): void {
+
+
     this.apiService.addOneBook(this.newBook)
       .subscribe(
         res => {
@@ -63,7 +65,7 @@ export class FetchDataComponent implements OnInit {
     this.apiService.updateOneBook(bookId, this.newBook)
       .subscribe(
         res => {
-          console.log(res);
+         // console.log(res);
           this.newBook = { id: null, bookName: null, author: null, category: null, price: null, iconId: null, icon: null };
           this.getAllBooks();
         },
@@ -75,7 +77,7 @@ export class FetchDataComponent implements OnInit {
     this.apiService.deleteMyBook(bookId)
       .subscribe(
         res => {
-          console.log(res);
+         // console.log(res);
           this.getAllMyBooks();
         },
         error => console.log(error)
@@ -85,7 +87,7 @@ export class FetchDataComponent implements OnInit {
     this.apiService.addOneMyBook(this.newMyBook)
       .subscribe(
         res => {
-          console.log(res);
+        //  console.log(res);
           this.newMyBook = { id: null, bookName: null, author: null, category: null, price: null, icon: null, iconId: null };
           this.getAllMyBooks();
         },
@@ -96,7 +98,7 @@ export class FetchDataComponent implements OnInit {
     this.apiService.updateOneMyBook(bookId, this.newMyBook)
       .subscribe(
         res => {
-          console.log(res);
+        //  console.log(res);
           this.newMyBook = { id: null, bookName: null, author: null, category: null, price: null, iconId: null, icon: null };
           this.getAllMyBooks();
         },
@@ -112,7 +114,7 @@ export class FetchDataComponent implements OnInit {
   public uploadFile(): void {
     this.apiService.uploadFile(this.myFile).subscribe(
       res => {
-        console.log(res);
+       // console.log(res);
       }, error => console.error(error)
     );
   }

@@ -36,10 +36,16 @@ export class ApiService {
 
   addOneBook(newBook: IBook): Observable<any> {
     const formData: FormData = new FormData();
+
     formData.append('icon', newBook.icon);
+
     delete newBook.id;
     delete newBook.icon;
+
     formData.append('body', JSON.stringify(newBook));
+
+    console.log(newBook);
+
 
     return this.http.post<any>(this.url + `books`, formData, { headers: this.httpHeadersFormData });
   }
