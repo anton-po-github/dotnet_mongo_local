@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 [ApiController]
 [Route("[controller]")]
@@ -16,8 +15,8 @@ public class AccountController : Controller
         _signInManager = signInManager;
     }
 
-    // [AllowAnonymous]
-    // [ValidateAntiForgeryToken]
+    //[AllowAnonymous]
+    //[ValidateAntiForgeryToken]
     [HttpPost("login")]
     public async Task<ActionResult<ApplicationUser>> Login(string email, string password)
     {
