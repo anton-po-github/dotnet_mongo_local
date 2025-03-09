@@ -20,9 +20,13 @@ public class BookService
     public async Task<Book> Create(Book book, IFormFile file)
     {
         var objectId = await _fileService.UploadFile(file);
+
         book.IconId = objectId.ToString();
+
         book.IconPath = await _fileService.GetBytesByName(file.FileName);
+
         _dataContext.Books.InsertOne(book);
+
         return book;
     }
 

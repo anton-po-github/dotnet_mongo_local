@@ -29,7 +29,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     services.AddScoped<BookService>();
     services.AddScoped<MyBookService>();
     services.AddScoped<FileService>();
-    services.AddScoped<NoteService>();
+    services.AddScoped<TokenService>();
 
     services.AddCors();
     services.AddControllers().AddJsonOptions(x =>

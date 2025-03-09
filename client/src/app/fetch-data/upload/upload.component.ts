@@ -9,7 +9,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class UploadComponent implements OnInit {
 
   @Output() fileImage: EventEmitter<File> = new EventEmitter();
-  //  @Output() fileImage: EventEmitter<any> = new EventEmitter();
   public progress: number;
   public message: string;
   constructor(
@@ -18,7 +17,6 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void { }
 
   public upload(event) {
-    //  console.log(event.target.files[0])
     this.fileImage.emit(event.target.files[0]);
     
     if (event.target.files && event.target.files[0]) {

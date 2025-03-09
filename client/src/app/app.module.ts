@@ -11,7 +11,6 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { UploadComponent } from './fetch-data/upload/upload.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignalrComponent } from './components/signalr/signalr.component';
@@ -23,7 +22,6 @@ import { SignalrComponent } from './components/signalr/signalr.component';
     HomeComponent,
     UploadComponent,
     SignalrComponent,
-    CounterComponent,
     FetchDataComponent
   ],
   imports: [
@@ -34,7 +32,6 @@ import { SignalrComponent } from './components/signalr/signalr.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'signalr', component: SignalrComponent },
     ])

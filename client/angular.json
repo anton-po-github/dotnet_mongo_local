@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dotnet_mongo_local": {
+    "dotnet_mongo_local_crud": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "dotnet_mongo_local:build"
+            "buildTarget": "dotnet_mongo_local_crud:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "dotnet_mongo_local:build:production"
+              "buildTarget": "dotnet_mongo_local_crud:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "dotnet_mongo_local:build"
+            "buildTarget": "dotnet_mongo_local_crud:build"
           }
         },
         "test": {
@@ -128,7 +128,7 @@
         }
       }
     },
-    "dotnet_mongo_local-e2e": {
+    "dotnet_mongo_local_crud-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -136,7 +136,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dotnet_mongo_local:serve"
+            "devServerTarget": "dotnet_mongo_local_crud:serve"
           }
         }
       }

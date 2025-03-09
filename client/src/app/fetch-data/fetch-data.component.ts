@@ -49,12 +49,9 @@ export class FetchDataComponent implements OnInit {
   }
 
   public addOneBook(): void {
-
-
     this.apiService.addOneBook(this.newBook)
       .subscribe(
         res => {
-          console.log(res);
           this.newBook = { id: null, bookName: null, author: null, category: null, price: null, icon: null, iconId: null };
           this.getAllBooks();
         },
