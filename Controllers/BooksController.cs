@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 [Produces("application/json")]
 [Consumes("application/json", "multipart/form-data")]
@@ -14,6 +15,7 @@ public class BooksController : ControllerBase
         _bookService = bookService;
     }
 
+    [Authorize]
     [HttpGet]
     public ActionResult<List<Book>> Get() => _bookService.Get();
 

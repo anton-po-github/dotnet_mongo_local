@@ -22,25 +22,11 @@ public class DataContext
         _bucket = new GridFSBucket(_database, gridFsBucketOptions);
     }
 
-    public IMongoCollection<Note> Notes
-    {
-        get
-        {
-            return _database.GetCollection<Note>(_databaseSettings.NotesCollectionName);
-        }
-    }
     public IMongoCollection<Book> Books
     {
         get
         {
             return _database.GetCollection<Book>(_databaseSettings.BooksCollectionName);
-        }
-    }
-    public IMongoCollection<Book> MyBooks
-    {
-        get
-        {
-            return _database.GetCollection<Book>(_databaseSettings.MyBooksCollectionName);
         }
     }
 
