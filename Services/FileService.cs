@@ -48,9 +48,9 @@ public class FileService
 
         byte[] content = await _dataContext.Bucket.DownloadAsBytesByNameAsync("123.png");
 
-        File.WriteAllBytes("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongo_local_crud/uploads/945e00f8-3c47-46f7-a04d-283489ae70a4.png", content);
+        File.WriteAllBytes("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongodb/uploads/945e00f8-3c47-46f7-a04d-283489ae70a4.png", content);
 
-        System.Diagnostics.Process.Start("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongo_local_crud/uploads/945e00f8-3c47-46f7-a04d-283489ae70a4.png");
+        System.Diagnostics.Process.Start("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongodb/uploads/945e00f8-3c47-46f7-a04d-283489ae70a4.png");
 
     }
 
@@ -77,20 +77,20 @@ public class FileService
 
     public string UploadFileMongo()
     {
-        byte[] source = File.ReadAllBytes("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongo_local_crud/Uploads/123.png");
+        byte[] source = File.ReadAllBytes("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongodb/Uploads/123.png");
         ObjectId id = _dataContext.Bucket.UploadFromBytes("123.png", source);
         return id.ToString();
     }
 
     public string UploadFileFromAStreamMongo()
     {
-        Stream stream = File.Open("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongo_local_crud/Uploads/123.png", FileMode.Open);
+        Stream stream = File.Open("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongodb/Uploads/123.png", FileMode.Open);
         var options = new GridFSUploadOptions()
         {
             Metadata = new BsonDocument() { { "author", "Anton Po" }, { "year", 2020 }
                 }
         };
-        var id = _dataContext.Bucket.UploadFromStream("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongo_local_crud/Uploads/123.png", stream, options);
+        var id = _dataContext.Bucket.UploadFromStream("/home/anton/WorkSharp/My Mongo Project/Angular-MongoDB-ASP.Core/dotnet_mongodb/Uploads/123.png", stream, options);
         return id.ToString();
     }
 
