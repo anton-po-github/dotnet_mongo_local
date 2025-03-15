@@ -19,6 +19,7 @@ public static class IdentityServicesExtensions
                 ConnectionString = "mongodb://admin:admin@localhost:27017/",
                 DatabaseName = "identity"
             },
+
             IdentityOptionsAction = options =>
             {
                 options.Password.RequireDigit = false;
@@ -41,17 +42,15 @@ public static class IdentityServicesExtensions
         .AddRoleManager<RoleManager<IdentityRole>>()
         .AddDefaultTokenProviders();
 
-        services.AddAuthentication(x =>
+        services.AddAuthentication(o =>
         {
-            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-
-        }).AddJwtBearer(x =>
+            o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(opt =>
         {
-            x.RequireHttpsMetadata = true;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters
+            opt.RequireHttpsMetadata = true;
+            opt.SaveToken = true;
+            opt.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 ValidateIssuer = true,

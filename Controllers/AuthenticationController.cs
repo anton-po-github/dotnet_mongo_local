@@ -139,6 +139,7 @@ public class AuthenticationController : ControllerBase
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
+
             var roles = await _userManager.GetRolesAsync(user);
 
             var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x));
